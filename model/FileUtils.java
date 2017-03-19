@@ -1,4 +1,4 @@
-package boggle;
+package boggle.model;
 
 
 import java.io.BufferedReader;

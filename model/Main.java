@@ -1,10 +1,7 @@
-package boggle;
+package boggle.model;
 
 import java.util.ArrayList;
 
-import boggle.model.BoardState;
-import boggle.model.Vector2;
-import boggle.model.WordSearch;
 import boggle.model.trie.Trie;
 import boggle.view.GUIHandler;
 import javafx.application.Application;
