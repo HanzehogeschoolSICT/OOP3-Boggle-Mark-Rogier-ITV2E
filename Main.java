@@ -2,11 +2,11 @@ package boggle;
 
 import java.util.ArrayList;
 
-import boggle.control.GUIHandler;
 import boggle.model.BoardState;
 import boggle.model.Vector2;
 import boggle.model.WordSearch;
 import boggle.model.trie.Trie;
+import boggle.view.GUIHandler;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

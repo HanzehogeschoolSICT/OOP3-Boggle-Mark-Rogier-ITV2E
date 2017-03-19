@@ -1,6 +1,5 @@
-package boggle.control;
+package boggle.view;
 
-import boggle.view.Board;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
