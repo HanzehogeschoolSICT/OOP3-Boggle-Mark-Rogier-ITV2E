@@ -1,11 +1,11 @@
-package model;
+package boggle;
 
 import java.util.ArrayList;
 
-import control.Main;
-import model.trie.Branch;
-import model.trie.WordBranch;
-import view.Board;
+import boggle.model.Vector2;
+import boggle.model.trie.Branch;
+import boggle.model.trie.WordBranch;
+import boggle.view.Board;
 
 public class WordUtils {
 

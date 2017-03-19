@@ -1,6 +1,6 @@
-package view;
+package boggle.view;
 
-import control.Main;
+import boggle.Main;
 import javafx.scene.Group;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;

@@ -1,4 +1,4 @@
-package model.trie;
+package boggle.model.trie;
 
 public class WordBranch extends Branch {
 

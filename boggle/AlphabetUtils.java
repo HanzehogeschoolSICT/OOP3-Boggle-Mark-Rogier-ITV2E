@@ -1,4 +1,5 @@
-package model;
+package boggle;
+
 
 import java.util.Random;
 

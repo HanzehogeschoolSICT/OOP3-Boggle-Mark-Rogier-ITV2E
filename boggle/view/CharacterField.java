@@ -1,4 +1,4 @@
-package view;
+package boggle.view;
 
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;

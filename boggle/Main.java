@@ -1,12 +1,12 @@
-package control;
+package boggle;
+
 import java.util.ArrayList;
+
+import boggle.control.GUIHandler;
+import boggle.model.Vector2;
+import boggle.model.trie.Trie;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.AlphabetUtils;
-import model.FileUtils;
-import model.Vector2;
-import model.WordUtils;
-import model.trie.Trie;
 
 public class Main extends Application {
 	

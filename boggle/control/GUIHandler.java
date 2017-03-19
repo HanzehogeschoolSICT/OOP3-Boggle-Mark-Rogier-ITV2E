@@ -1,11 +1,12 @@
-package control;
+package boggle.control;
 
+import boggle.Main;
+import boggle.view.Board;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import view.Board;
 
 public class GUIHandler {
 	
