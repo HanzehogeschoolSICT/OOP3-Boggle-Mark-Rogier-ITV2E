@@ -38,5 +38,7 @@ public class Main extends Application {
 		for(String word : foundWords) {
 			System.out.println(word);
 		}
+		
+		new Test(foundWords);
 	}
 }
