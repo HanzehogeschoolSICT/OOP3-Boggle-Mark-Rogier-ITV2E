@@ -2,8 +2,8 @@ package boggle.model;
 
 public class Vector2 {
 
-	int x;
-	int y;
+	private int x;
+	private int y;
 	
 	public Vector2(int x, int y) {
 		this.x = x;

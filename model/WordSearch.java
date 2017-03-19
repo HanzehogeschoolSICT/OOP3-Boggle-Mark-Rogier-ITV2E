@@ -1,12 +1,10 @@
-package boggle;
+package boggle.model;
 
 import java.util.ArrayList;
 
-import boggle.model.Vector2;
 import boggle.model.trie.Branch;
 import boggle.model.trie.Trie;
 import boggle.model.trie.WordBranch;
-import boggle.view.Board;
 
 public class WordSearch {
 
@@ -21,12 +19,12 @@ public class WordSearch {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<String> findWords(Board board, Vector2 current) {		
+	public ArrayList<String> findWords(BoardState board, Vector2 current) {
     	for(int x = -1; x <= 1; x++) {
     		for(int y = -1; y <= 1; y++) {
     			Vector2 newVec = new Vector2(current.getX() + x, current.getY() + y);
-    			
-    			if(!(x == 0 && y == 0) && newVec.inBounds(0, board.getRows(), 0, board.getColumns()) && !usedCords.contains(newVec)) {    				
+    			    			
+    			if(!(x == 0 && y == 0) && newVec.inBounds(0, board.getSize(), 0, board.getSize()) && !usedCords.contains(newVec)) {    				
     				ArrayList<Vector2> oldUsedCords = (ArrayList<Vector2>) usedCords.clone();
     				ArrayList<Vector2> newUsedCords = (ArrayList<Vector2>) usedCords.clone();
     				newUsedCords.add(newVec);
@@ -35,7 +33,7 @@ public class WordSearch {
     				
     				Branch currentBranch = trie.getBranch(currentWord);
     				if(currentBranch != null) {
-    					if(currentBranch instanceof WordBranch) {
+    					if(currentBranch instanceof WordBranch) {    						
     						if(!foundWords.contains(currentWord)) {
     							foundWords.add(currentWord);
     						}
@@ -52,11 +50,11 @@ public class WordSearch {
     	return foundWords;
     }
 	
-	public String getWordFromCords(Board display, ArrayList<Vector2> cords) {
+	public String getWordFromCords(BoardState board, ArrayList<Vector2> cords) {
     	String word = "";
     	
     	for(Vector2 vec : cords) {    		
-    		word += display.getCharacterField(vec.getX(), vec.getY()).getCharacter();
+    		word += board.toString().charAt(vec.getX() * board.getSize() + vec.getY());
     	}
     	
     	return word;

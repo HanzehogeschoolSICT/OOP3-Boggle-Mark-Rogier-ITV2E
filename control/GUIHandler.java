@@ -8,10 +8,12 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class GUIHandler {
-	
-	private Board board;
+		
+	Stage primaryStage;
 	
 	public GUIHandler(Stage primaryStage) {
+		this.primaryStage = primaryStage;
+		
 		primaryStage.setTitle("Boggle fun!");
 
 		//Close program on GUI close
@@ -21,20 +23,17 @@ public class GUIHandler {
 		        System.exit(0);
 		    }
 		});
+	}
+	
+	public void loadBoard(int size, String boardStr) {
+		Board board = new Board(size, size, boardStr);
 		
-		//Load board
-		board = new Board(4, 4, "aagrmvndifesarte");
-        
-        BorderPane mainPanel = new BorderPane();
+		BorderPane mainPanel = new BorderPane();
         mainPanel.setCenter(board.getDisplay());
         
         //Load window
         Scene scene = new Scene(mainPanel, board.getElementSize() * board.getColumns() + 100, board.getElementSize() * board.getRows() + 100);
         primaryStage.setScene(scene);
         primaryStage.show();
-	}
-	
-	public Board getBoard() {
-		return board;
 	}
 }

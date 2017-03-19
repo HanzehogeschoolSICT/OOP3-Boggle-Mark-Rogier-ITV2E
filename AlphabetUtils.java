@@ -10,4 +10,15 @@ public class AlphabetUtils {
 		
 		return alphabet[new Random().nextInt(alphabet.length)];
 	}
+	
+	public String makeRandomString(int length) {
+		String str = "";
+		
+		while(length > 0) {
+			length--;
+			str += getRandomCharacter();
+		}
+		
+		return str;
+	}
 }
