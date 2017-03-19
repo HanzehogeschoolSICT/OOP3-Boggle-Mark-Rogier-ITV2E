@@ -1,6 +1,5 @@
 package boggle.control;
 
-import boggle.Main;
 import boggle.view.Board;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -12,7 +11,7 @@ public class GUIHandler {
 	
 	private Board board;
 	
-	public GUIHandler(Main main, Stage primaryStage) {
+	public GUIHandler(Stage primaryStage) {
 		primaryStage.setTitle("Boggle fun!");
 
 		//Close program on GUI close
@@ -24,7 +23,7 @@ public class GUIHandler {
 		});
 		
 		//Load board
-		board = new Board(main, 4, 4, null);
+		board = new Board(4, 4, null);
         
         BorderPane mainPanel = new BorderPane();
         mainPanel.setCenter(board.getDisplay());

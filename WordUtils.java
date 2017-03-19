@@ -4,21 +4,14 @@ import java.util.ArrayList;
 
 import boggle.model.Vector2;
 import boggle.model.trie.Branch;
+import boggle.model.trie.Trie;
 import boggle.model.trie.WordBranch;
 import boggle.view.Board;
 
 public class WordUtils {
-
-	private Main main;
-	
-	public WordUtils(Main main) {
-		this.main = main;
-	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<String> findWords(ArrayList<String> foundWords, ArrayList<Vector2> usedCords, Vector2 current) {
-    	Board board = main.getGUIHandler().getBoard();
-    	
+	public ArrayList<String> findWords(Trie trie, Board board, ArrayList<String> foundWords, ArrayList<Vector2> usedCords, Vector2 current) {    	
     	for(int x = -1; x <= 1; x++) {
     		for(int y = -1; y <= 1; y++) {
     			Vector2 newVec = new Vector2(current.getX() + x, current.getY() + y);
@@ -29,7 +22,7 @@ public class WordUtils {
     				
     				String currentWord = getWordFromCords(board, newUsedCords);
     				
-    				Branch currentBranch = main.getTrie().getBranch(currentWord);
+    				Branch currentBranch = trie.getBranch(currentWord);
     				if(currentBranch != null) {
     					if(currentBranch instanceof WordBranch) {
     						if(!foundWords.contains(currentWord)) {
@@ -37,7 +30,7 @@ public class WordUtils {
     						}
     					}
     					
-    					findWords(foundWords, newUsedCords, newVec);
+    					findWords(trie, board, foundWords, newUsedCords, newVec);
     				}
     			}
     		}
