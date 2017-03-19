@@ -23,7 +23,7 @@ public class GUIHandler {
 		});
 		
 		//Load board
-		board = new Board(4, 4, null);
+		board = new Board(4, 4, "aagrmvndifesarte");
         
         BorderPane mainPanel = new BorderPane();
         mainPanel.setCenter(board.getDisplay());

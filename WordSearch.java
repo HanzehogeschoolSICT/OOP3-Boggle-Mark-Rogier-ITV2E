@@ -8,15 +8,26 @@ import boggle.model.trie.Trie;
 import boggle.model.trie.WordBranch;
 import boggle.view.Board;
 
-public class WordUtils {
+public class WordSearch {
+
+	private Trie trie;
+	private ArrayList<String> foundWords;
+	private ArrayList<Vector2> usedCords;
+	
+	public WordSearch(Trie trie) {
+		this.trie = trie;
+		this.foundWords = new ArrayList<String>();
+		this.usedCords = new ArrayList<Vector2>();
+	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<String> findWords(Trie trie, Board board, ArrayList<String> foundWords, ArrayList<Vector2> usedCords, Vector2 current) {    	
+	public ArrayList<String> findWords(Board board, Vector2 current) {		
     	for(int x = -1; x <= 1; x++) {
     		for(int y = -1; y <= 1; y++) {
     			Vector2 newVec = new Vector2(current.getX() + x, current.getY() + y);
     			
     			if(!(x == 0 && y == 0) && newVec.inBounds(0, board.getRows(), 0, board.getColumns()) && !usedCords.contains(newVec)) {    				
+    				ArrayList<Vector2> oldUsedCords = (ArrayList<Vector2>) usedCords.clone();
     				ArrayList<Vector2> newUsedCords = (ArrayList<Vector2>) usedCords.clone();
     				newUsedCords.add(newVec);
     				
@@ -30,7 +41,9 @@ public class WordUtils {
     						}
     					}
     					
-    					findWords(trie, board, foundWords, newUsedCords, newVec);
+    					usedCords = newUsedCords;
+    					findWords(board, newVec);
+    					usedCords = oldUsedCords;
     				}
     			}
     		}
@@ -38,16 +51,14 @@ public class WordUtils {
     	
     	return foundWords;
     }
-    
-    
-    public String getWordFromCords(Board display, ArrayList<Vector2> cords) {
+	
+	public String getWordFromCords(Board display, ArrayList<Vector2> cords) {
     	String word = "";
     	
-    	for(Vector2 vec : cords) {
+    	for(Vector2 vec : cords) {    		
     		word += display.getCharacterField(vec.getX(), vec.getY()).getCharacter();
     	}
     	
     	return word;
     }
-	
 }
