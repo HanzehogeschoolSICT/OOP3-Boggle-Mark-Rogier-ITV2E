@@ -2,32 +2,40 @@ package control;
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.AlphabetUtils;
 import model.FileUtils;
 import model.Vector2;
 import model.WordUtils;
 import model.trie.Trie;
-import view.GUIHandler;
 
 public class Main extends Application {
 	
-	public static Trie trie;
+	private Trie trie;
+	private GUIHandler guiHandler;
+	
+	private WordUtils wordUtils;
+	private AlphabetUtils alphabetUtils;
 	
 	public static void main(String[] args) {
-		trie = new Trie(FileUtils.readFile("dict.txt"));
-		
 		launch(args);
 	}
 	 
 	@Override
 	public void start(Stage primaryStage) {
+		trie = new Trie(FileUtils.readFile("dict.txt"));
+		
+		//Build utils
+		wordUtils = new WordUtils(this);
+		alphabetUtils = new AlphabetUtils();
+		
 		//Start GUI
-		GUIHandler.startGUI(primaryStage);
-	    
+		guiHandler = new GUIHandler(this, primaryStage);
+		
 		//Find words
 		ArrayList<String> foundWords = new ArrayList<String>();
-		for(int x = 0; x < GUIHandler.getBoard().getRows(); x++) {
-			for(int y = 0; y < GUIHandler.getBoard().getColumns(); y++) {
-				foundWords = WordUtils.findWords(foundWords, new ArrayList<Vector2>(), new Vector2(x, y));
+		for(int x = 0; x < guiHandler.getBoard().getRows(); x++) {
+			for(int y = 0; y < guiHandler.getBoard().getColumns(); y++) {
+				foundWords = wordUtils.findWords(foundWords, new ArrayList<Vector2>(), new Vector2(x, y));
 			}
 		}
 	  
@@ -35,5 +43,17 @@ public class Main extends Application {
 		for(String word : foundWords) {
 			System.out.println(word);
 		}
+	}
+	
+	public Trie getTrie() {
+		return trie;
+	}
+	
+	public GUIHandler getGUIHandler() {
+		return guiHandler;
+	}
+	
+	public AlphabetUtils getAlphabetUtils() {
+		return alphabetUtils;
 	}
 }

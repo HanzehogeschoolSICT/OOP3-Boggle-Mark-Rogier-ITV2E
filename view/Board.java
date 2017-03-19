@@ -1,22 +1,25 @@
 package view;
 
+import control.Main;
 import javafx.scene.Group;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
-import model.AlphabetUtils;
 
 public class Board {
 
     private static final double ELEMENT_SIZE = 100;
     private static final double GAP = ELEMENT_SIZE / 50;
 
+    private Main main;
+    
     private TilePane tilePane = new TilePane();
     private Group display = new Group(tilePane);
     private int nRows;
     private int nCols;
     private String board;
     
-    public Board(int nRows, int nCols, String board) {
+    public Board(Main main, int nRows, int nCols, String board) {
+    	this.main = main;
     	this.board = board;
     	
         tilePane.setHgap(GAP);
@@ -77,7 +80,7 @@ public class Board {
         
     	characterField.setColor(Color.GRAY);
     	if(c == null) {
-    		characterField.setCharacter(AlphabetUtils.getRandomCharacter());
+    		characterField.setCharacter(main.getAlphabetUtils().getRandomCharacter());
     	} else {
     		characterField.setCharacter(c.charAt(0));
     	}

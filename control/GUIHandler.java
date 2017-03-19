@@ -1,16 +1,17 @@
-package view;
+package control;
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import view.Board;
 
 public class GUIHandler {
 	
-	private static Board board;
+	private Board board;
 	
-	public static void startGUI(Stage primaryStage) {
+	public GUIHandler(Main main, Stage primaryStage) {
 		primaryStage.setTitle("Boggle fun!");
 
 		//Close program on GUI close
@@ -22,7 +23,7 @@ public class GUIHandler {
 		});
 		
 		//Load board
-		board = new Board(4, 4, null);
+		board = new Board(main, 4, 4, null);
         
         BorderPane mainPanel = new BorderPane();
         mainPanel.setCenter(board.getDisplay());
@@ -33,7 +34,7 @@ public class GUIHandler {
         primaryStage.show();
 	}
 	
-	public static Board getBoard() {
+	public Board getBoard() {
 		return board;
 	}
 }
