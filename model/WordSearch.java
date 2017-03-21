@@ -1,25 +1,25 @@
 package boggle.model;
 
 import java.util.ArrayList;
-
 import boggle.model.trie.Branch;
 import boggle.model.trie.Trie;
 import boggle.model.trie.WordBranch;
+import boggle.view.Board;
 
 public class WordSearch {
 
 	private Trie trie;
-	private ArrayList<String> foundWords;
+	private ArrayList<Word> foundWords;
 	private ArrayList<Vector2> usedCords;
 	
 	public WordSearch(Trie trie) {
 		this.trie = trie;
-		this.foundWords = new ArrayList<String>();
+		this.foundWords = new ArrayList<Word>();
 		this.usedCords = new ArrayList<Vector2>();
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<String> findWords(BoardState board, Vector2 current) {
+	public ArrayList<Word> findWords(Board board, Vector2 current) {
     	for(int x = -1; x <= 1; x++) {
     		for(int y = -1; y <= 1; y++) {
     			Vector2 newVec = new Vector2(current.getX() + x, current.getY() + y);
@@ -33,9 +33,11 @@ public class WordSearch {
     				
     				Branch currentBranch = trie.getBranch(currentWord);
     				if(currentBranch != null) {
-    					if(currentBranch instanceof WordBranch) {    						
-    						if(!foundWords.contains(currentWord)) {
-    							foundWords.add(currentWord);
+    					if(currentBranch instanceof WordBranch) {    
+    						Word word = new Word(currentWord, newUsedCords);
+    						
+    						if(!foundWord(currentWord)) {
+    							foundWords.add(word);
     						}
     					}
     					
@@ -50,7 +52,16 @@ public class WordSearch {
     	return foundWords;
     }
 	
-	public String getWordFromCords(BoardState board, ArrayList<Vector2> cords) {
+	public boolean foundWord(String word) {
+		for(int x = 0; x < foundWords.size(); x++) {
+			if(foundWords.get(x).getWord().equals(word)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public String getWordFromCords(Board board, ArrayList<Vector2> cords) {
     	String word = "";
     	
     	for(Vector2 vec : cords) {    		

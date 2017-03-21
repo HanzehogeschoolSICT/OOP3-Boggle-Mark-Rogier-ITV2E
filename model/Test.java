@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Test {
 
-	public Test(ArrayList<String> foundWords) {
+	public Test(ArrayList<Word> foundWords) {
 		ArrayList<String> dict = FileUtils.readFile("dict.txt");
 		
-		for(String foundWord: foundWords) {
+		for(Word foundWord: foundWords) {
 			assert dict.contains(foundWord);
 		}
 	}

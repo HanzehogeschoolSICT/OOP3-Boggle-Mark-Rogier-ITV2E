@@ -18,6 +18,10 @@ public class Vector2 {
 		return y;
 	}
 	
+	public int asIndex(int size) {
+		return x * size + y;
+	}
+	
 	public boolean inBounds(int xl, int xh, int yl, int yh) {
     	return x >= xl && x < xh && y >= yl && y < yh;
     }

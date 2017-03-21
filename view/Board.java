@@ -1,5 +1,6 @@
 package boggle.view;
 
+import boggle.model.Vector2;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
@@ -11,8 +12,8 @@ import javafx.scene.text.TextAlignment;
 
 public class Board {
 
-    private static final double ELEMENT_SIZE = 100;
-    private static final double GAP = ELEMENT_SIZE / 50;
+    private double ELEMENT_SIZE;
+    private double GAP;
     
     private TilePane tilePane = new TilePane();
     private Group display = new Group(tilePane);
@@ -20,8 +21,11 @@ public class Board {
     private int nCols;
     private String boardStr;
     
-    public Board(int nRows, int nCols, String boardStr) {    	
+    public Board(int nRows, int nCols, String boardStr, double elementSize) {    	
     	this.boardStr = boardStr;
+    	
+    	ELEMENT_SIZE = elementSize;
+    	GAP = 0;
     	
         tilePane.setHgap(GAP);
         tilePane.setVgap(GAP);
@@ -57,6 +61,14 @@ public class Board {
         return display;
     }
     
+    public int getSize() {
+    	return nRows;
+    }
+    
+    public String toString() {
+    	return boardStr;
+    }
+    
     private void fillBoard() {
         tilePane.getChildren().clear();
         for (int i = 0; i < nCols; i++) {
@@ -65,13 +77,28 @@ public class Board {
             }
         }
     }
-
+    
+    public void resetColors() {
+    	for(int x = 0; x < nRows; x++) {
+			for(int y = 0; y < nRows; y++) {
+				Canvas canvas = getCanvas(new Vector2(x, y));
+				
+				setColor(canvas, Color.GRAY);
+				setCharacter(canvas, boardStr.charAt(new Vector2(x, y).asIndex(nCols)));
+			}
+		}
+    }
+    
     private Canvas createElement(int index) {
     	Canvas canvas = new Canvas(ELEMENT_SIZE, ELEMENT_SIZE);
     	setColor(canvas, Color.GREY);
     	setCharacter(canvas, boardStr.charAt(index));
     	
         return canvas;
+    }
+    
+    public Canvas getCanvas(Vector2 cord) {
+    	return (Canvas) tilePane.getChildren().get(cord.asIndex(nRows));
     }
     
     public void setColor(Canvas canvas, Color color) {
@@ -85,7 +112,7 @@ public class Board {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		
         gc.setFill(Color.BLACK);
-        gc.setFont(Font.font("Calibri", 50));
+        gc.setFont(Font.font("Calibri", ELEMENT_SIZE / 1.5));
         gc.setTextAlign(TextAlignment.CENTER);
         gc.setTextBaseline(VPos.CENTER);
         gc.fillText(
