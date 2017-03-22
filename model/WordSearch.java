@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import model.trie.Branch;
 import model.trie.Trie;
 import model.trie.WordBranch;
-import view.Board;
 
 public class WordSearch {
 
@@ -19,12 +18,14 @@ public class WordSearch {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<Word> findWords(Board board, Vector2 current) {
+	public ArrayList<Word> findWords(String board, Vector2 current) {
+		int boardSize = (int) Math.pow(board.length(), 0.5);
+		
     	for(int x = -1; x <= 1; x++) {
     		for(int y = -1; y <= 1; y++) {
     			Vector2 newVec = new Vector2(current.getX() + x, current.getY() + y);
     			    			
-    			if(!(x == 0 && y == 0) && newVec.inBounds(0, board.getSize(), 0, board.getSize()) && !usedCords.contains(newVec)) {    				
+    			if(!(x == 0 && y == 0) && newVec.inBounds(0, boardSize, 0, boardSize) && !usedCords.contains(newVec)) {    				
     				ArrayList<Vector2> oldUsedCords = (ArrayList<Vector2>) usedCords.clone();
     				ArrayList<Vector2> newUsedCords = (ArrayList<Vector2>) usedCords.clone();
     				newUsedCords.add(newVec);
@@ -61,11 +62,11 @@ public class WordSearch {
 		return false;
 	}
 	
-	public String getWordFromCords(Board board, ArrayList<Vector2> cords) {
+	public String getWordFromCords(String board, ArrayList<Vector2> cords) {
     	String word = "";
     	
     	for(Vector2 vec : cords) {    		
-    		word += board.toString().charAt(vec.getX() * board.getSize() + vec.getY());
+    		word += board.toString().charAt(vec.getX() * (int) Math.pow(board.length(), 0.5) + vec.getY());
     	}
     	
     	return word;

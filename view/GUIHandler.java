@@ -1,7 +1,12 @@
-package model;
+package view;
 
 import java.util.ArrayList;
 
+import model.AlphabetUtils;
+import model.FileUtils;
+import model.Vector2;
+import model.Word;
+import model.WordSearch;
 import model.trie.Trie;
 import view.Board;
 import javafx.collections.FXCollections;
@@ -74,7 +79,7 @@ public class GUIHandler {
         		
         		for(int x = 0; x < size; x++) {
         			for(int y = 0; y < size; y++) {	
-        				foundWords = wordSearch.findWords(board, new Vector2(x, y));
+        				foundWords = wordSearch.findWords(board.toString(), new Vector2(x, y));
         			}
         		}
         		
