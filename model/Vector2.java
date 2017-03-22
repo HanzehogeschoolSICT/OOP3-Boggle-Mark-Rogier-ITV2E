@@ -1,4 +1,4 @@
-package boggle.model;
+package model;
 
 public class Vector2 {
 

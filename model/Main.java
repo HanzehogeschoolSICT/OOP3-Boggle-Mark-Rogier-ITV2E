@@ -1,6 +1,5 @@
-package boggle.model;
+package model;
 
-import boggle.view.GUIHandler;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

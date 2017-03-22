@@ -1,10 +1,10 @@
-package boggle.model;
+package model;
 
 import java.util.ArrayList;
-import boggle.model.trie.Branch;
-import boggle.model.trie.Trie;
-import boggle.model.trie.WordBranch;
-import boggle.view.Board;
+import model.trie.Branch;
+import model.trie.Trie;
+import model.trie.WordBranch;
+import view.Board;
 
 public class WordSearch {
 

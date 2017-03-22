@@ -1,6 +1,5 @@
-package boggle.view;
+package view;
 
-import boggle.model.Vector2;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
@@ -81,10 +80,10 @@ public class Board {
     public void resetColors() {
     	for(int x = 0; x < nRows; x++) {
 			for(int y = 0; y < nRows; y++) {
-				Canvas canvas = getCanvas(new Vector2(x, y));
+				Canvas canvas = getCanvas(x, y);
 				
 				setColor(canvas, Color.GRAY);
-				setCharacter(canvas, boardStr.charAt(new Vector2(x, y).asIndex(nCols)));
+				setCharacter(canvas, boardStr.charAt(x * nRows + y));
 			}
 		}
     }
@@ -97,8 +96,8 @@ public class Board {
         return canvas;
     }
     
-    public Canvas getCanvas(Vector2 cord) {
-    	return (Canvas) tilePane.getChildren().get(cord.asIndex(nRows));
+    public Canvas getCanvas(int x, int y) {
+    	return (Canvas) tilePane.getChildren().get(x * nRows + y);
     }
     
     public void setColor(Canvas canvas, Color color) {

@@ -1,13 +1,9 @@
-package boggle.view;
+package model;
 
 import java.util.ArrayList;
 
-import boggle.model.AlphabetUtils;
-import boggle.model.FileUtils;
-import boggle.model.Vector2;
-import boggle.model.Word;
-import boggle.model.WordSearch;
-import boggle.model.trie.Trie;
+import model.trie.Trie;
+import view.Board;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,7 +27,7 @@ public class GUIHandler {
 		
 	int screenSize = 800;
 	int listWidth = 250;
-	int inputSize = 30;
+	int inputBarHeight = 30;
 	
 	public GUIHandler(Stage primaryStage) {		
 		primaryStage.setTitle("Boggle fun!");
@@ -47,10 +43,10 @@ public class GUIHandler {
 		loadGUI(primaryStage);
 	}
 	
-	public void loadGUI(Stage primaryStage) {		
+	public void loadGUI(Stage primaryStage) {
 		mainPanel = new BorderPane();
 		
-        TextField sizeField = new TextField("10");
+        TextField sizeField = new TextField("4");
         sizeField.setMaxWidth(35);
         
         Button make = new Button();
@@ -93,7 +89,7 @@ public class GUIHandler {
         mainPanel.setTop(hBox);
         
         //Load window
-        Scene scene = new Scene(mainPanel, screenSize + listWidth, inputSize + screenSize);
+        Scene scene = new Scene(mainPanel, screenSize + listWidth, inputBarHeight + screenSize);
         primaryStage.setScene(scene);
         primaryStage.show();
 	}
@@ -121,7 +117,7 @@ public class GUIHandler {
 					board.resetColors();
 							
 					for(Vector2 cord : word.getPath()) {
-						Canvas canvas = board.getCanvas(cord);
+						Canvas canvas = board.getCanvas(cord.getX(), cord.getY());
 						
 						board.setColor(canvas, Color.DARKGREEN);
 						board.setCharacter(canvas, board.toString().charAt(cord.asIndex(board.getSize())));
